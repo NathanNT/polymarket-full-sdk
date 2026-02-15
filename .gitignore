@@ -38,7 +38,7 @@ env/
 *.swo
 *~
 
-# SQLite databases (homemade indexer)
+# SQLite databases (onchain indexer)
 *.db
 *.sqlite
 *.sqlite3

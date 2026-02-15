@@ -37,7 +37,7 @@ Key configuration variables:
 | `POLYMARKET_TEST_MARKET_URL` | Target market/event URL for analysis |
 | `POLYMARKET_THEGRAPH_API_KEY` | The Graph API key (required for `app.py`, `app_thegraph.py`) |
 | `POLYMARKET_GOLDSKY_API_KEY` | Goldsky API key (optional) |
-| `POLYMARKET_POLYGON_RPC_URL` | Polygon RPC endpoint (required for `app_homemade.py`) |
+| `POLYMARKET_POLYGON_RPC_URL` | Polygon RPC endpoint (required for `app_onchain.py`) |
 | `POLYMARKET_CLOB_PRIVATE_KEY` | Private key for CLOB trading |
 
 ## Modules
@@ -106,12 +106,12 @@ clob = ClobClientWrapper()
 # Requires API credentials or private key with derive_api_creds=True
 ```
 
-### polymarket_homemade
+### polymarket_onchain
 
 On-chain indexer that fetches `OrderFilled` events directly from Polygon RPC and stores them in SQLite.
 
 ```python
-from polymarket_homemade import OnchainFillIndexer
+from polymarket_onchain import OnchainFillIndexer
 
 indexer = OnchainFillIndexer()
 indexer.sync()
@@ -152,12 +152,12 @@ Fetch and analyze trades from the CLOB L2 orderbook.
 python app_clob.py
 ```
 
-### app_homemade.py - On-Chain Indexing
+### app_onchain.py - On-Chain Indexing
 
 Index `OrderFilled` events directly from Polygon RPC into SQLite.
 
 ```bash
-python app_homemade.py
+python app_onchain.py
 ```
 
 ### app_compare_subgraph_and_data.py - Source Comparison
@@ -203,7 +203,7 @@ polymarketer/
 ├── app.py                           # The Graph analytics
 ├── app_clob.py                      # CLOB trade analysis
 ├── app_goldsky.py                   # Goldsky analytics
-├── app_homemade.py                  # On-chain indexing
+├── app_onchain.py                  # On-chain indexing
 ├── app_thegraph.py                  # The Graph details
 ├── app_compare_subgraph_and_data.py # Source comparison
 ├── requirements.txt                 # Dependencies
@@ -229,7 +229,7 @@ polymarketer/
 │   ├── __init__.py
 │   └── client.py
 │
-└── polymarket_homemade/             # On-chain indexer
+└── polymarket_onchain/              # On-chain indexer (Polygon RPC)
     ├── __init__.py
     └── indexer.py
 ```

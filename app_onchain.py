@@ -11,7 +11,7 @@ from urllib.parse import urlparse
 from dotenv import dotenv_values
 
 from polymarket_gamma import GammaClient
-from polymarket_homemade import OnchainFillIndexer
+from polymarket_onchain import OnchainFillIndexer
 
 
 DECIMALS = Decimal(10) ** 6
@@ -131,21 +131,21 @@ def main() -> None:
     env = dotenv_values(".env")
     rpc_url = os.getenv("POLYMARKET_POLYGON_RPC_URL") or env.get("POLYMARKET_POLYGON_RPC_URL")
     url = os.getenv("POLYMARKET_TEST_MARKET_URL") or env.get("POLYMARKET_TEST_MARKET_URL")
-    db_path = os.getenv("POLYMARKET_HOMEMADE_DB_PATH") or env.get("POLYMARKET_HOMEMADE_DB_PATH") or "polymarket_homemade.db"
-    chunk_size = int(os.getenv("POLYMARKET_HOMEMADE_CHUNK_SIZE") or env.get("POLYMARKET_HOMEMADE_CHUNK_SIZE") or 10)
-    min_chunk_size = int(os.getenv("POLYMARKET_HOMEMADE_MIN_CHUNK_SIZE") or env.get("POLYMARKET_HOMEMADE_MIN_CHUNK_SIZE") or 1)
-    from_block_env = os.getenv("POLYMARKET_HOMEMADE_FROM_BLOCK") or env.get("POLYMARKET_HOMEMADE_FROM_BLOCK")
-    to_block_env = os.getenv("POLYMARKET_HOMEMADE_TO_BLOCK") or env.get("POLYMARKET_HOMEMADE_TO_BLOCK")
-    max_span_env = os.getenv("POLYMARKET_HOMEMADE_MAX_BLOCK_SPAN") or env.get("POLYMARKET_HOMEMADE_MAX_BLOCK_SPAN")
+    db_path = os.getenv("POLYMARKET_ONCHAIN_DB_PATH") or env.get("POLYMARKET_ONCHAIN_DB_PATH") or "polymarket_homemade.db"
+    chunk_size = int(os.getenv("POLYMARKET_ONCHAIN_CHUNK_SIZE") or env.get("POLYMARKET_ONCHAIN_CHUNK_SIZE") or 10)
+    min_chunk_size = int(os.getenv("POLYMARKET_ONCHAIN_MIN_CHUNK_SIZE") or env.get("POLYMARKET_ONCHAIN_MIN_CHUNK_SIZE") or 1)
+    from_block_env = os.getenv("POLYMARKET_ONCHAIN_FROM_BLOCK") or env.get("POLYMARKET_ONCHAIN_FROM_BLOCK")
+    to_block_env = os.getenv("POLYMARKET_ONCHAIN_TO_BLOCK") or env.get("POLYMARKET_ONCHAIN_TO_BLOCK")
+    max_span_env = os.getenv("POLYMARKET_ONCHAIN_MAX_BLOCK_SPAN") or env.get("POLYMARKET_ONCHAIN_MAX_BLOCK_SPAN")
     debug = (
-        (os.getenv("POLYMARKET_HOMEMADE_DEBUG") or env.get("POLYMARKET_HOMEMADE_DEBUG") or "true")
+        (os.getenv("POLYMARKET_ONCHAIN_DEBUG") or env.get("POLYMARKET_ONCHAIN_DEBUG") or "true")
         .strip()
         .lower()
         in {"1", "true", "yes", "on"}
     )
-    debug_every = int(os.getenv("POLYMARKET_HOMEMADE_DEBUG_EVERY") or env.get("POLYMARKET_HOMEMADE_DEBUG_EVERY") or 20)
+    debug_every = int(os.getenv("POLYMARKET_ONCHAIN_DEBUG_EVERY") or env.get("POLYMARKET_ONCHAIN_DEBUG_EVERY") or 20)
     auto_from_market_start = (
-        (os.getenv("POLYMARKET_HOMEMADE_AUTO_FROM_MARKET_START") or env.get("POLYMARKET_HOMEMADE_AUTO_FROM_MARKET_START") or "true")
+        (os.getenv("POLYMARKET_ONCHAIN_AUTO_FROM_MARKET_START") or env.get("POLYMARKET_ONCHAIN_AUTO_FROM_MARKET_START") or "true")
         .strip()
         .lower()
         in {"1", "true", "yes", "on"}

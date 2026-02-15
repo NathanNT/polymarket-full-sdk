@@ -43,7 +43,7 @@ class OnchainFillIndexer:
     def __init__(
         self,
         rpc_url: str,
-        db_path: str = "polymarket_homemade.db",
+        db_path: str = "polymarket_onchain.db",
         chain_id: int = 137,
         exchange_addresses: Optional[Iterable[str]] = None,
     ) -> None:
